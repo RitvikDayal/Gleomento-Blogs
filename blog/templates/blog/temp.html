@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %}
+	<title>Gleomento - {{ title }}</title>
+	{% else %}
+	<title>Gleomento</title>
+	{% endif %}
+</head>
+<body>
+	<h1>Welocme to Gleomento Blogs</h1>
+
+	{% for post in posts %}
+		<h3>{{ post.title }}</h3>
+		<p>By {{ post.author }} on {{ post.date_posted }}</p>
+		<p>{{ post.content }}</p>
+	{% endfor %}
+
+</body>
+</html>
