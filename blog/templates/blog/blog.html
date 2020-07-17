@@ -28,7 +28,11 @@
 							
 								<h2>{{ post.title }}</h2>
 								<p>{{ post.content }}</p>
-								<p class="gtco-category">{{ post.date_posted|date:"F d, Y" }} by {{ post.author }}</p>
+								<p class="gtco-category">{{ post.date_posted|date:"F d, Y" }} by {{ post.author }}
+								<img class="rounded-circle"
+								style ="border-radius: 20px!important; height: 35px!important; width: 35px!important; float: right;"
+								 src="{{ post.author.profile.profile_image.url}}">
+								</p>
 							
 						</div>
 					</a>

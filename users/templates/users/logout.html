@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+	<div class="container">
+	<h1>You have been logged out of your account</h1>
+	<h4>logged out by mistake<a class="link" href="{% url 'login' %}"> Sign in </a></h4>
+	<br>
+	<a class="btn btn-info" href="{% url 'gleo-home' %}">Home</a>
+	</div>
+</div>
+
+{% endblock content %}

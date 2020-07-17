@@ -1684,7 +1684,7 @@ form label {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url(../images/loader.gif) center no-repeat #fff;
+  background: url("{% static 'user/images/loader.gif' %}") center no-repeat #fff;
 }
 
 .js .animate-box {
@@ -2278,6 +2278,5 @@ USER PROFILE STYLING
 .profile-user-page .data-user li a:hover span {
   color: #3498db; 
 }
-
 
 /*# sourceMappingURL=style.css.map */
