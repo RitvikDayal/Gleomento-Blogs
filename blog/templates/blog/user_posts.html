@@ -1,0 +1,140 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url({% static 'blog/images/img_bg_4.jpg' %})" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row row-mt-15em" style="margin-top: 8em!important;">
+				<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
+					<h1>Blogs by <strong> {{ view.kwargs.username }}</strong> ({{ page_obj.paginator.count }})</h1>	
+					<h2>Far far away, behind the word mountains, far from the countries Vokalia.</h2>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="gtco-section gtco-gray-bg">
+		<div class="gtco-container">
+			<div class="row">
+				{% for post in posts %}
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="{% url 'post-detail' post.id %}" class="gtco-card-item">
+						<figure>
+							<div class="overlay"><i class="ti-plus"></i></div>
+							<img src="{% static 'blog/images/img_1.jpg' %}" alt="Image" class="img-responsive">
+						</figure>
+						<div class="gtco-text text-left">
+							
+								<h2>{{ post.title }}</h2>
+								<p>{{ post.summary }}</p>
+								<p class="gtco-category">{{ post.date_posted|date:"F d, Y" }} by {{ post.author }}
+								<img class="rounded-circle"
+								style ="border-radius: 20px!important; height: 35px!important; width: 35px!important; float: right;"
+								 src="{{ post.author.profile.profile_image.url}}">
+								</p>
+							
+						</div>
+					</a>
+				</div>
+
+				{% if forloop.counter|divisibleby:3 %}
+					<div class="clearfix visible-lg-block visible-md-block"></div>
+				{% endif %}
+
+				{% endfor %}
+				<div style="text-align:center;">
+				{% if is_paginated %}
+				<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page=1">First</a>
+					{% if page_obj.has_previous %}
+						<a class="btn btn-outline-info md-4" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+					{% endif %}
+
+					{% for num in page_obj.paginator.page_range %}
+						{% if page_obj.number == num %}
+							<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page={{ num }}">{{ num }}</a>
+						{% else %}
+							<a class="btn btn-outline-info md-4" href="?page={{ num }}">{{ num }}</a>
+						{% endif %}
+					{% endfor %}
+
+					{% if page_obj.has_next %}
+						<a class="btn btn-outline-info md-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+					{% endif %}
+						<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="gtco-cover gtco-cover-sm" style="background-image: url({% static 'blog/images/img_bg_1.jpg' %})"  data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container text-center">
+			<div class="display-t">
+				<div class="display-tc">
+					<h1>We have high quality services that you will surely love!</h1>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	<footer id="gtco-footer" role="contentinfo">
+		<div class="gtco-container">
+			<div class="row row-p	b-md">
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>About Us</h3>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore eos molestias quod sint ipsum possimus temporibus officia iste perspiciatis consectetur in fugiat.</p>
+						<p><a href="#">Learn more...</a></p>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Services</h3>
+						<ul class="gtco-footer-links">
+							<li><a href="#">Data Analytics</a></li>
+							<li><a href="#">Web Development</a></li>
+							<li><a href="#">Branding &amp; Identity</a></li>
+							<li><a href="#">eCommerce Development</a></li>
+							<li><a href="#">Design &amp; UX</a></li>
+							<li><a href="#">Strategt</a></li>
+						</ul>
+					</div>
+				</div>
+
+				
+
+				<div class="col-md-3 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Get In Touch</h3>
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+						<small class="block">Designed by <a href="http://GetTemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
+					</p>
+					<p class="pull-right">
+						<ul class="gtco-social-icons pull-right">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+{% endblock content %}

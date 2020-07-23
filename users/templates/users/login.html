@@ -50,7 +50,10 @@ color: red;
                         </p>
                     </div>
                     <div class="form-group form-button">
-                        <button class="form-submit" id="signin" type="submit">Sign In</button>
+                        <button class="form-submit" id="signin" type="submit">Sign In</button><br><br>
+                        <small class="text-muted ml-2">
+                        <a href="{% url 'password-reset' %}">Forgot Password?</a>
+                        </small>
                     </div>
                 </form>
             </div>

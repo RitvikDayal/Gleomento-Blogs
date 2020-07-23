@@ -1,7 +1,17 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url({% static 'users/images/img_bg_4.jpg' %})" data-stellar-background-ratio="0.5">
+
+<style>
+.gtco-cover.gtco-cover-sm {
+    height: 480px!important;
+}
+.row-mt-15em{
+	margin-top: 7em;
+}
+</style>
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url({% static 'blog/images/img_bg_4.jpg' %})" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="gtco-container">
 			<div class="row row-mt-15em">
@@ -16,18 +26,17 @@
 	<div class="gtco-section gtco-gray-bg">
 		<div class="gtco-container">
 			<div class="row">
-
 				{% for post in posts %}
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
+					<a href="{% url 'post-detail' post.id %}" class="gtco-card-item">
 						<figure>
 							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_1.jpg' %}" alt="Image" class="img-responsive">
+							<img src="{% static 'blog/images/img_1.jpg' %}" alt="Image" class="img-responsive">
 						</figure>
 						<div class="gtco-text text-left">
 							
 								<h2>{{ post.title }}</h2>
-								<p>{{ post.content }}</p>
+								<p>{{ post.summary }}</p>
 								<p class="gtco-category">{{ post.date_posted|date:"F d, Y" }} by {{ post.author }}
 								<img class="rounded-circle"
 								style ="border-radius: 20px!important; height: 35px!important; width: 35px!important; float: right;"
@@ -37,170 +46,40 @@
 						</div>
 					</a>
 				</div>
+
+				{% if forloop.counter|divisibleby:3 %}
+					<div class="clearfix visible-lg-block visible-md-block"></div>
+				{% endif %}
+
 				{% endfor %}
-				
-				<div class="clearfix visible-sm-block"></div>
+				<div style="text-align:center;">
+				{% if is_paginated %}
+				<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page=1">First</a>
+					{% if page_obj.has_previous %}
+						<a class="btn btn-outline-info md-4" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+					{% endif %}
 
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_3.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Site of The Month</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
+					{% for num in page_obj.paginator.page_range %}
+						{% if page_obj.number == num %}
+							<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page={{ num }}">{{ num }}</a>
+						{% else %}
+							<a class="btn btn-outline-info md-4" href="?page={{ num }}">{{ num }}</a>
+						{% endif %}
+					{% endfor %}
+
+					{% if page_obj.has_next %}
+						<a class="btn btn-outline-info md-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+					{% endif %}
+						<a class="btn btn-info md-4" style="background-color:#66d37e; border-color:#66d37e;" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+				{% endif %}
 				</div>
-
-				<div class="clearfix visible-lg-block visible-md-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="users/images/img_1.jpg" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>25 Minimal Web Design for Inspiration</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="clearfix visible-sm-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_2.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Creative and Trending Website Portfolio</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_3.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Site of The Month</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="clearfix visible-lg-block visible-md-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_1.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>25 Minimal Web Design for Inspiration</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_2.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Creative and Trending Website Portfolio</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_3.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Site of The Month</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="clearfix visible-lg-block visible-md-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_1.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>25 Minimal Web Design for Inspiration</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="clearfix visible-sm-block"></div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_2.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Creative and Trending Website Portfolio</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="#" class="gtco-card-item">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="{% static 'users/images/img_3.jpg' %}" alt="Image" class="img-responsive">
-						</figure>
-						<div class="gtco-text text-left">
-							<h2>Site of The Month</h2>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-							<p class="gtco-category">Sep. 25th, 2016 by John Doe</p>
-						</div>
-					</a>
-				</div>
-
-				<div class="clearfix visible-lg-block visible-md-block"></div>
-
 			</div>
 		</div>
 	</div>
 
 	
 	
-	<div class="gtco-cover gtco-cover-sm" style="background-image: url({% static 'users/images/img_bg_1.jpg' %})"  data-stellar-background-ratio="0.5">
+	<div class="gtco-cover gtco-cover-sm" style="background-image: url({% static 'blog/images/img_bg_1.jpg' %})"  data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="gtco-container text-center">
 			<div class="display-t">

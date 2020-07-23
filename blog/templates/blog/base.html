@@ -27,7 +27,8 @@
 	<meta name="twitter:card" content="" />
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	
+	<link href="{% static 'blog/fonts/css/all.css' %}" rel="stylesheet">
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{% static 'blog/css/animate.css' %} ">
 	<!-- Icomoon Icon Fonts-->
@@ -89,20 +90,19 @@
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
 							<li class="active"><a href="{% url 'gleo-home' %}">Home</a></li>
-							<li class="has-dropdown">
-								<a href="services.html">Services</a>
-								<ul class="dropdown">
-									<li><a href="#">Branding</a></li>
-									<li><a href="#">Development</a></li>
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">Marketing</a></li>
-								</ul>
-							</li>
 							<li><a href="{% url 'gleo-about' %}">About</a></li>
 							<li><a href="{% url 'gleo-blog' %}">Blog</a></li>
 							{% if user.is_authenticated %}
-							<li><a href="{% url 'logout' %}">Logout</a></li>
-							<li><a href="{% url 'user-profile' %}">Profile</a></li>
+							<li class="has-dropdown">
+								<a href="{% url 'user-profile' %}">{{ user.username }} <i class="fas fa-caret-down"></i></a>
+								<ul class="dropdown">
+									<li><a href="{% url 'user-profile' %}">Profile</a></li>
+									<li><a href="{% url 'logout' %}">Logout</a></li>
+								</ul>
+							</li>
+							
+									<li><a href="{% url 'post-create' %}">New Blog  <i class="fas fa-plus"></i></a></li>
+							
 							{% else %}
 							<li><a href="{% url 'login' %}">Log In</a></li>
 							<li><a href="{% url 'gleo-signup' %}">Register</a></li>

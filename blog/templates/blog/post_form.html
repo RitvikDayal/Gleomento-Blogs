@@ -1,0 +1,53 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<form action="" method="POST">
+{% csrf_token %}
+<style>
+.row-mt-15em {
+    margin-top: 4em!important;
+}
+</style>
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_bg_3.jpg); height:400px;" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row row-mt-15em">
+				<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
+					<h1>Create: <strong>NEW POST</strong></h1>	
+				</div>
+			</div>
+		</div>
+	</header>
+
+<div class="gtco-section gtco-gray-bg">
+    <div class="gtco-container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="col-md-9 animate-box">
+                {{form|crispy}}
+                <br>
+                <button class="btn btn-outline-success" type="submit">POST</button>
+            </div>
+            <div class="col-md-3 col-md-push-1 animate-box">
+                
+                <div class="gtco-contact-info">
+                    <h3>Recent Post</h3>
+                    <ul class="check-li">
+                        <li>Quaerat quisquam quasi</li>
+                        <li>Accusantium qui atque doloremque</li>
+                        <li>Expedita atque quod</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</form>
+
+
+{% endblock content %}

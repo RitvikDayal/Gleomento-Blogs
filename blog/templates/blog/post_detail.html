@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_bg_3.jpg)" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row row-mt-15em" style="margin-top: 4em!important;">
+				<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
+					<h1>TITLE: <strong> {{ object.title }} </strong></h1>
+                    <div class="gtco-text text-left" >
+					<h5 style="color: white; width: 150px; height: 50px"><a href="{% url 'user-posts' post.author.username %}">By: {{ object.author }}<img class="rounded-circle" style ="border-radius: 20px!important; height: 35px!important; width: 35px!important; float: right;"
+								 src="{{ object.author.profile.profile_image.url}}"></a></h5>
+                    <h5 style="color: white;">On: {{ object.date_posted|date:"F d, Y" }}</h5>
+                    {% if object.author == user %}
+                    <p class="text-muted">
+                    <a class="tools" href="{% url 'post-update' object.id %}"><i class="fas fa-pencil-alt" style="padding-right:15px; font-size: 24px" ></i></a> 
+                    <a class="tools" href="{% url 'post-delete' object.id %}"><i class="fas fa-trash-alt" style="padding-right:15px; font-size: 24px"></i></a>
+                    </p>
+                    {% endif %}
+                    </div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+<div class="gtco-section gtco-gray-bg">
+    <div class="gtco-container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="col-md-9 animate-box">
+                {{object.content}}
+            </div>
+            <div class="col-md-3 col-md-push-1 animate-box">
+                
+                <div class="gtco-contact-info">
+                    <h3>Recent Post</h3>
+                    <ul>
+                        <li><i class="fas fa-arrow-circle-right"></i> Quaerat quisquam quasi</li>
+                        <li><i class="fas fa-arrow-circle-right"></i> Accusantium qui atque doloremque</li>
+                        <li><i class="fas fa-arrow-circle-right"></i> Expedita atque quod</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
