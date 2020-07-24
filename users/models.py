@@ -10,8 +10,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile '
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kawrgs):
+        super().save( *args, **kawrgs)
 
         img = Image.open(self.profile_image.path)
 
